@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrendWear - Clothing Store</title>
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+  <!-- Popup Overlay (hidden by default) -->
+  <div class="overlay" id="overlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:1000;">
+    <div class="popup" style="background:#fff; width:300px; padding:20px; border-radius:10px; text-align:center; position:relative;">
+      <span onclick="closePopup()" style="float:right;cursor:pointer; font-size:24px;">&times;</span>
+      <div class="tabs" style="margin-bottom:10px;">
+        <button id="loginTab" onclick="showForm('login')" class="active" style="padding:10px; margin:5px; border:none; cursor:pointer; background:#ddd;">Login</button>
+        <button id="signupTab" onclick="showForm('signup')" style="padding:10px; margin:5px; border:none; cursor:pointer; background:#ddd;">Signup</button>
+      </div>
+      <!-- Login Form -->
+      <form id="loginForm" style="display:block; margin-top:15px;">
+        <input type="email" placeholder="Email" required style="width:90%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:5px;">
+        <input type="password" placeholder="Password" required style="width:90%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:5px;">
+        <button type="submit" style="width:90%; padding:8px; margin:6px 0; background:#dc862b; color:white; border:none; border-radius:5px;">Login</button>
+      </form>
+      <!-- Signup Form -->
+      <form id="signupForm" style="display:none; margin-top:15px;">
+        <input type="text" placeholder="Username" required style="width:90%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:5px;">
+        <input type="email" placeholder="Email" required style="width:90%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:5px;">
+        <input type="password" placeholder="Password" required style="width:90%; padding:8px; margin:6px 0; border:1px solid #ccc; border-radius:5px;">
+        <button type="submit" style="width:90%; padding:8px; margin:6px 0; background:#dc862b; color:white; border:none; border-radius:5px;">Signup</button>
+      </form>
+    </div>
+  </div>
+  <!-- Header -->
+  <header class="header-area">
+    <div class="top-header">
+      <div class="top-header-left">
+        <div class="social-icon">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="top-header-right">
+        <ul class="contact-list">
+          <li><a href="contact us.html">CONTACT US</a></li>
+          <li><a href="">Mon - Sat 11:00 AM - 2:00 PM (LIVE SALE)</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-header">
+      <div class="name">
+        <i class="fa-solid fa-shirt"></i>
+        <h1>TrendWear</h1>
+      </div>
+      <nav class="display">
+        <ul>
+          <a href="#">Home</a>
+          <a href="#">Shop</a>
+          <a href="men_section.html">Men</a>
+          <a href="women_section.html">Women</a>
+          <a href="#">Sale</a>
+            <a onclick="openPopup()" style="cursor: pointer;">login / signup</a>
+          
+        </ul>
+        <!-- <i class="fa-solid fa-bars"></i> -->
+      </nav>
+    </div>
+  </header>
+
+<!-- Parallax 1 (Banner with left text, like your screenshot) -->
+<div class="parallax parallax-1">
+  <div class="banner-left">
+    <h1>Step Into Style</h1>
+    <h2><strong>Shop With Us</strong></h2>
+    <p>Welcome to TrendWear! Discover the latest fashion that blends comfort with style. 
+       Fashion made simple, stylish, and just for you.</p>
+    <button>Shop Now</button>
+  </div>
+</div>
+  <!-- New Arrivals Section (Parallax 2) -->
+  <!-- <section class="parallax arrivals">
+    <div class="overlay">
+      <h2>New Arrivals</h2>
+      <p><b>Fresh fashion picks just for you</p> -->
+      <!-- <div class="products">
+        <div class="product-card">
+          <img src="top1.png" alt="T-shirt">
+          <h3>Classic Tee</h3>
+          <p>$29.99</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="top2.png" alt="Jeans">
+          <h3>Denim Jeans</h3>
+          <p>$49.99</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="top1.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$50.99</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="top3.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$34.99</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="top2.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$56.76</p>
+          <button>Add to Cart</button>
+        </div>
+        <div class="product-card">
+          <img src="top3.png" alt="Dress">
+          <h3>Summer Dress</h3>
+          <p>$39.99</p>
+          <button>Add to Cart</button>
+        </div>
+          <div class="product-card">
+          <img src="top1.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$56.76</p>
+          <button>Add to Cart</button>
+        </div>
+          <div class="product-card">
+          <img src="top2.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$56.76</p>
+          <button>Add to Cart</button>
+        </div>
+          <div class="product-card">
+          <img src="top3.png" alt="Jeans">
+          <h3>cloth</h3>
+          <p>$56.76</p>
+          <button>Add to Cart</button>
+        </div>
+      </div>
+    </div> -->
+  <!-- </section> -->
+<section class="top-trends">
+  <div class="container">
+    <h2 class="section-title">🔥 Top Trends</h2>
+    <p class="section-subtitle">Catch the latest fashion that's ruling right now</p>
+
+    <div class="trends-grid">
+      <!-- Trend Item 1 -->
+      <div class="trend-card">
+        <img src="https://i.pinimg.com/1200x/67/24/13/6724132e62dc352db166214560faed06.jpg" alt="Streetwear Jacket">
+        <div class="trend-info">
+          <h3>Streetwear Jackets</h3>
+          <p>Oversized and comfy styles to keep you ahead in street fashion.</p>
+        </div>
+      </div>
+
+      <!-- Trend Item 2 -->
+      <div class="trend-card">
+        <img src="https://i.pinimg.com/736x/13/d3/0e/13d30e2ead1ab4430f41779332e38ad5.jpg" alt="Co-Ord Sets">
+        <div class="trend-info">
+          <h3>Co-Ord Sets</h3>
+          <p>Minimal effort, maximum style – trending co-ord outfits for all occasions.</p>
+        </div>
+      </div>
+     
+
+      <!-- Trend Item 3 -->
+      <div class="trend-card">
+        <img src="https://i.pinimg.com/736x/5f/f2/7e/5ff27ee0eb2df77c75df36dc2567668f.jpg" alt="Denim Revival">
+        <div class="trend-info">
+          <h3>Denim Revival</h3>
+          <p>From baggy jeans to crop denim tops – denim is back in trend.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--discount section-->
+<section class="discount-section">
+  <div class="container">
+    <h2 class="section-title">🔥 Hot Deals - Up to 50% OFF</h2>
+    <div class="discount-grid">
+
+      <!-- Card 1 -->
+      <div class="discount-card">
+        <img src="https://i.pinimg.com/736x/2f/d6/29/2fd62997c50fec3fe6bdc3445937b577.jpg" alt="Cloth 1">
+        <span class="discount-badge">40% OFF</span>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="discount-card">
+        <img src="https://i.pinimg.com/736x/a2/8a/a0/a28aa0a3031fceab574be318b88ad05d.jpg" alt="Cloth 2">
+        <span class="discount-badge">50% OFF</span>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="discount-card">
+        <img src="https://i.pinimg.com/736x/01/14/ac/0114ac8082112da2e1efc45c389a8e9a.jpg" alt="Cloth 3">
+        <span class="discount-badge">30% OFF</span>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="discount-card">
+        <img src="https://i.pinimg.com/736x/56/ab/b5/56abb52f072adab7e53701b3091b9cf4.jpg" alt="Cloth 4">
+        <span class="discount-badge">45% OFF</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Sale Section (Parallax 3) -->
+  
+  <section class="parallax sale">
+  <div class="sale-content">
+    <div class="content">
+      <h2>🔥 Mid-Season Sale</h2>
+      <p>Up to 50% Off on Selected Items</p>
+      <button>Shop Sale</button>
+    </div>
+  
+    <div class="content">
+      <h2>🔥New Arrivals</h2>
+      <p>Trendy Styles Just Dropped</p>
+      <button>Explore</button>
+    </div>
+
+
+    <div class="content">
+      <h2>🔥Best Sellers</h2>
+      <p>Most Loved by Our Customers</p>
+      <button>Shop Bests</button>
+    </div>
+  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="col-heading">Contact Us</div>
+            <ul class="col-line">
+              <li>+91 90000 00000</li>
+              <li><a href="mailto:trendwear@gmail.com">trendwear@gmail.com</a></li>
+              <li>123 Fashion Street, Mumbai, India</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-heading">Our Services</div>
+            <ul class="col-line">
+              <li>Free Shipping</li>
+              <li>Easy Returns</li>
+              <li>24/7 Support</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="col-heading">Quick Links</div>
+            <ul class="col-line">
+              <li><a href="about us.html">About Us</a></li>
+              <li><a href="contact us.html">Contact Us</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="name1">
+              <i class="fa-solid fa-shirt"></i>
+              <h1>TrendWear</h1>
+            </div>
+            <p class="address-text">123 Fashion Street, Mumbai, India</p>
+            <div class="social-icons">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+              <a href="#"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copyright">
+        <hr>
+        <p>© 2025 TrendWear | All rights reserved</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+<script>
+  function openPopup() {
+    document.getElementById("overlay").style.display = "flex";
+    document.body.classList.add('blurred'); // Add blur effect to the background
+    showForm('login'); // Always show login form first
+  }
+  function closePopup() {
+    document.getElementById("overlay").style.display = "none";
+    document.body.classList.remove('blurred'); // Remove blur effect from the background
+  }
+  function showForm(type) {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("signupForm").style.display = "none";
+    document.getElementById("loginTab").classList.remove("active");
+    document.getElementById("signupTab").classList.remove("active");
+    if(type === "login") {
+      document.getElementById("loginForm").style.display = "block";
+      document.getElementById("loginTab").classList.add("active");
+    } else {
+      document.getElementById("signupForm").style.display = "block";
+      document.getElementById("signupTab").classList.add("active");
+    }
+  }
+</script>
+</html>
