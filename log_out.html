@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      color: #a67c00; /* Rich Gold */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .logout-box {
+      background: #fff;
+      padding: 40px;
+      border-radius: 18px;
+      width: 350px;
+      text-align: center;
+      border: 2px solid #a67c00; /* Gold border */
+      box-shadow: 0 8px 25px rgba(166, 124, 0, 0.2);
+    }
+
+    .logout-box h2 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #a67c00;
+    }
+
+    .logout-box p {
+      margin-bottom: 25px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      width: 90%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 2px solid #a67c00;
+      transition: 0.3s;
+    }
+
+    .btn-logout {
+      background: #a67c00; /* Solid gold */
+      color: #fff;
+    }
+
+    .btn-logout:hover {
+      background: transparent;
+      color: #a67c00;
+      box-shadow: 0 0 12px rgba(166, 124, 0, 0.6);
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: #a67c00;
+    }
+
+    .btn-cancel:hover {
+      background: #a67c00;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(166, 124, 0, 0.6);
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-box">
+    <h2>Confirm Logout</h2>
+    <p>Are you sure you want to log out? You can always log back in to explore the latest trends 👗✨</p>
+    
+    <!-- Logout Form -->
+    <form action="logout.php" >
+      <button type="submit" class="btn btn-logout">Yes, Logout</button>
+    </form>
+
+    <!-- Cancel (Back to Home) -->
+    <a href="home.html">
+      <button type="button" class="btn btn-cancel">Cancel</button>
+    </a>
+  </div>
+</body>
+</html> 

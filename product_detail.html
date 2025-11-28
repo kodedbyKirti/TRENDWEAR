@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trendwear | Summer Elegance Dress</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #fff;
+        }
+
+        .brand {
+            font-size: 32px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 8px 12px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .search-bar::before {
+            content: '🔍';
+            margin-right: 8px;
+        }
+
+        /* Main Content */
+        .container {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 40px;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+        }
+
+        .thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .thumbnail {
+            width: 60px;
+            height: 80px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .thumbnail.active {
+            border-color: #000;
+        }
+
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .main-image-container {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .main-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .main-image:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255,255,255,0.8);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+        }
+
+        .main-image-container:hover .nav-arrows {
+            display: block;
+        }
+
+        .nav-left {
+            left: 10px;
+        }
+
+        .nav-right {
+            right: 10px;
+        }
+
+        /* Product Info */
+        .product-info {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .price-block {
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .original-price {
+            font-size: 16px;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-left: 10px;
+        }
+
+        .selector {
+            margin-bottom: 20px;
+        }
+
+        .selector label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .selector select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .size-guide {
+            font-size: 12px;
+            color: #007bff;
+            text-decoration: underline;
+            margin-top: 5px;
+        }
+
+        .add-to-bag {
+            width: 100%;
+            background-color: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .add-to-bag:hover {
+            background-color: #229954;
+        }
+
+        .wishlist {
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .delivery-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .delivery-info::before {
+            content: '🚚';
+            margin-right: 8px;
+        }
+
+        /* Accordion Sections */
+        .accordion {
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .accordion-header {
+            padding: 20px 0;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 18px;
+        }
+
+        .accordion-item.active .accordion-header::after {
+            content: '-';
+        }
+
+        .accordion-content {
+            display: none;
+            padding-bottom: 20px;
+            color: #666;
+        }
+
+        .accordion-item.active .accordion-content {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .image-gallery {
+                flex-direction: column;
+            }
+
+            .thumbnails {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .thumbnail {
+                width: 50px;
+                height: 60px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .search-bar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">Trendwear</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for items and brands">
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="image-gallery">
+            <div class="thumbnails">
+                <div class="thumbnail active" data-index="0">
+                    <img src="https://images.meesho.com/images/products/434268623/eosru_512.webp" alt="Dress View 1">
+                </div>
+                <div class="thumbnail" data-index="1">
+                    <img src="https://images.meesho.com/images/products/434268623/eosru_512.webp" alt="Dress View 2">
+                </div>
+                <div class="thumbnail" data-index="2">
+                    <img src="https://images.meesho.com/images/products/434268623/eosru_512.webp" alt="Dress View 3">
+                </div>
+                <div class="thumbnail" data-index="3">
+                    <img src="https://images.meesho.com/images/products/434268623/eosru_512.webp" alt="Dress View 4">
+                </div>
+            </div>
+            <div class="main-image-container">
+                <img src="https://images.meesho.com/images/products/434268623/eosru_512.webp" alt="Summer Elegance Dress" class="main-image" id="mainImage">
+                <button class="nav-arrows nav-left" onclick="changeImage(-1)"><</button>
+                <button class="nav-arrows nav-right" onclick="changeImage(1)">></button>
+            </div>
+        </div>
+
+        <div class="product-info">
+            <h1 class="product-title">& Other Stories wool belted maxi coat with funnel neck in brown</h1>
+            <div class="price-block">
+                <div class="current-price">$386.56</div>
+                <div class="original-price">$429.52 <span class="discount">(-10%)</span></div>
+            </div>
+
+            <div class="selector">
+                <label for="color">Colour: Brown</label>
+                <select id="color">
+                    <option>Brown</option>
+                    <option>Black</option>
+                    <option>White</option>
+                </select>
+            </div>
+
+            <div class="selector">
+                <label for="size">Size</label>
+                <select id="size">
+                    <option>Select size</option>
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+                <div class="size-guide">Size Guide</div>
+            </div>
+
+            <button class="add-to-bag" onclick="addToBag()">
+                ADD TO BAG
+                <span class="wishlist">❤️</span>
+            </button>
+
+            <div class="delivery-info">Free delivery available</div>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Product Details</div>
+                    <div class="accordion-content">
+                        <p>Perfect for summer evenings and special occasions. Made from premium cotton blend for comfort and style.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Brand</div>
+                    <div class="accordion-content">
+                        <p>Trendwear - Timeless fashion for the modern woman.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">Look After Me</div>
+                    <div class="accordion-content">
+                        <p>Machine wash cold. Do not bleach. Tumble dry low.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">About Me</div>
+                    <div class="accordion-content">
+                        <p>Light and airy floral dress perfect for summer days. Pair it with sandals and a tote for a chic look.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageSrc = urlParams.get('image');
+        const title = urlParams.get('title');
+
+        // Update page content with parameters
+        if (imageSrc && title) {
+            document.querySelector('.product-title').textContent = title;
+            document.getElementById('mainImage').src = imageSrc;
+            document.querySelectorAll('.thumbnail img').forEach(img => img.src = imageSrc);
+            document.title = `Trendwear | ${title}`;
+        }
+
+        let currentImageIndex = 0;
+        const images = [
+            imageSrc || "https://images.meesho.com/images/products/434268623/eosru_512.webp",
+            imageSrc || "https://images.meesho.com/images/products/434268623/eosru_512.webp",
+            imageSrc || "https://images.meesho.com/images/products/434268623/eosru_512.webp",
+            imageSrc || "https://images.meesho.com/images/products/434268623/eosru_512.webp"
+        ];
+
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            updateMainImage();
+        }
+
+        function updateMainImage() {
+            document.getElementById('mainImage').src = images[currentImageIndex];
+            document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentImageIndex);
+            });
+        }
+
+        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+            thumb.addEventListener('click', () => {
+                currentImageIndex = index;
+                updateMainImage();
+            });
+        });
+
+        function toggleAccordion(header) {
+            const item = header.parentElement;
+            item.classList.toggle('active');
+        }
+
+        function addToBag() {
+            alert('Added to bag!');
+            // Add animation or cart update logic here
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sale Timer</title>
+  <style>
+    #timer {
+      font-size: 24px;
+      font-weight: bold;
+      color: red;
+      background: #fce4ec;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔥 Mega Sale Live! (11 AM - 2 PM) 🔥</h2>
+  <div id="timer"></div>
+
+  <script>
+    function updateTimer() {
+      let now = new Date();
+      let start = new Date();
+      let end = new Date();
+
+      // Sale time set karo
+      start.setHours(11, 0, 0, 0); // 11:00 AM
+      end.setHours(17, 0, 0, 0);   // 2:00 PM
+
+      let message = "";
+
+      if (now >= start && now <= end) {
+        // Sale chal rahi hai → kitna time bacha hai
+        let diff = end - now;
+        let hours = Math.floor(diff / (1000 * 60 * 60));
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        message = `Sale khatam hone mein: ${hours}h ${minutes}m ${seconds}s`;
+      } else if (now < start) {
+        // Sale start hone tak time
+        let diff = start - now;
+        let hours = Math.floor(diff / (1000 * 60 * 60));
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        message = `Sale start hone mein: ${hours}h ${minutes}m ${seconds}s`;
+      } else {
+        // Sale end ho gayi
+        message = "⚠ Sale khatam ho gayi!";
+      }
+
+      document.getElementById("timer").innerHTML = message;
+    }
+
+    // Timer update every second
+    setInterval(updateTimer, 1000);
+    updateTimer();
+  </script>
+</body>
+</html>

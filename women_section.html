@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dresses Collection | TrendWear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --success: #2ecc71;
+            --light: #ecf0f1;
+            --dark: #1a252f;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --gradient: linear-gradient(135deg, var(--secondary), var(--primary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: var(--text);
+            overflow-x: hidden;
+            padding-top: 110px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Area */
+        .header-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: white;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .top-header {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--dark);
+            padding: 0 20px;
+            z-index: 1000;
+        }
+
+        .social-icon a {
+            margin-right: 15px;
+            color: var(--light);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .social-icon a:hover {
+            color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .contact-list li {
+            display: inline;
+            margin-right: 20px;
+            font-weight: 500;
+        }
+
+        .contact-list li a {
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-list li a:hover {
+            color: var(--secondary);
+        }
+
+        .bottom-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: white;
+        }
+
+        .name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .name i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .name:hover i {
+            transform: rotate(15deg);
+        }
+
+        .name h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        .display {
+            display: flex;
+            gap: 10px;
+        }
+
+        .display ul a {
+            margin-right: 20px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .display ul a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .display ul a:hover {
+            color: var(--accent);
+        }
+
+        .display ul a:hover::after {
+            width: 100%;
+        }
+
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+            margin: 0 20px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 45px 12px 20px;
+            border: 2px solid var(--light);
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+            background: #f8f9fa;
+        }
+
+        .search-bar:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.3);
+            background: white;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--gradient);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .search-btn:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.4);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 15px;
+            margin-top: 10px;
+            box-shadow: var(--shadow);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            border: 1px solid var(--light);
+        }
+
+        .search-results.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .search-result-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--light);
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--text);
+        }
+
+        .search-result-item:hover {
+            background: #f8f9fa;
+            padding-left: 25px;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            margin-left: 20px;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cart-modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cart-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cart-header {
+            background: var(--gradient);
+            color: white;
+            padding: 20px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-items {
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            border-bottom: 1px solid var(--light);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .quantity {
+            font-weight: bold;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .remove-item {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .remove-item:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+        }
+
+        .cart-footer {
+            border-top: 2px solid var(--light);
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(45deg, var(--success), #27ae60);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .checkout-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:hover::before {
+            left: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=1200&h=600&fit=crop') center/cover;
+            height: 70vh;
+            display: flex;
+            
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: fadeInUp 1s ease;
+            font-weight: 800;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #c0392b);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            animation: fadeInUp 1s ease 0.4s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(231, 76, 60, 0.5);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+            position: relative;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--gradient);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            background: white;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .category-image {
+           width: 100%;
+    height: 250px; /* keep card size */
+    object-fit: contain; /* shows full image */
+    background-color: #f8f9fa;
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+        }
+
+        .category-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .category-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .category-info p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .shop-now {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .shop-now:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Product Pages */
+        .product-page {
+            display: none;
+            padding: 80px 0;
+            min-height: 70vh;
+        }
+
+        .product-page.active {
+            display: block;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .product-image {
+             width: 100%;
+    height: 250px; /* keep card size */
+    object-fit: contain; /* shows full image */
+    background-color: #f8f9fa;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(45deg, var(--success), #27ae60);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-to-cart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            transform: translateY(-2px);
+        }
+
+        .add-to-cart:hover::before {
+            left: 100%;
+        }
+
+        /* Brand Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .brand-section {
+            background: white;
+            text-align: center;
+        }
+
+        .brand-slider {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .brand-slide {
+            width: 150px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: var(--transition);
+            padding: 15px;
+        }
+
+        .brand-slide:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow);
+        }
+
+        .brand-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+
+        .brand-slide:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--gradient);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .newsletter h3 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background: linear-gradient(45deg, var(--accent), #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 8px;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            color: #95a5a6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 130px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .category-grid,
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .brand-slider {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .brand-slide {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .bottom-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                margin: 10px 0;
+                max-width: 100%;
+            }
+
+            .display ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .display ul a {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-area">
+        <div class="top-header">
+            <div class="top-header-left">
+                <div class="social-icon">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+            <div class="top-header-right">
+                <ul class="contact-list">
+                    <li><a href="contact-us.html">CONTACT US</a></li>
+                    <li><a href="">Mon - Sat 11:00 AM - 2:00 PM (LIVE SALE)</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bottom-header">
+            <div class="name">
+                <i class="fa-solid fa-shirt"></i>
+                <h1>TrendWear</h1>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-bar" id="searchInput" placeholder="Search for dresses, gowns, skirts...">
+                <button class="search-btn" onclick="performSearch()">🔍</button>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <nav class="display">
+                <ul>
+                    <a href="index2.html">Home</a>
+                   
+                    <a href="men_section.html">Men</a>
+                    <a href="women_section.html">Women</a>
+                   
+                    
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Shopping Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">✕</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty">Your cart is empty</div>
+            </div>
+            <div class="cart-footer" id="cartFooter" style="display: none;">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Content -->
+    <div id="homeContent">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Women's Dresses Collection</h1>
+                <p>Discover the latest trends in women's fashion</p>
+                <a href="#categories" class="cta-button">Shop Now</a>
+            </div>
+        </section>
+
+        <section class="categories" id="categories">
+            <div class="container">
+                <h2 class="section-title">Shop by Category</h2>
+                <div class="category-grid">
+                    <div class="category-card" onclick="openCategory('evening')">
+                        <img src="https://i.pinimg.com/1200x/51/57/c5/5157c5d2ba7e7f671cb2a29e57181517.jpg" alt="Evening Dresses" class="category-image">
+                        <div class="category-info">
+                            <h3>Evening Dresses</h3>
+                            <p>Elegant gowns and dresses for special occasions</p>
+                            <a href="#" class="shop-now" onclick="event.stopPropagation(); openCategory('evening')">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="openCategory('casual')">
+                        <img src="https://i.pinimg.com/736x/f4/dc/d0/f4dcd01732b2465f7b12f72483bfa711.jpg" alt="Casual Dresses" class="category-image">
+                        <div class="category-info">
+                            <h3>Casual Dresses</h3>
+                            <p>Comfortable everyday dresses for a relaxed style</p>
+                            <a href="#" class="shop-now" onclick="event.stopPropagation(); openCategory('casual')">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="category-card" onclick="openCategory('formal')">
+                        <img src="https://i.pinimg.com/736x/53/83/63/538363a2dd68ddf61b4c2fb5bb336798.jpg" alt="Formal Dresses" class="category-image">
+                        <div class="category-info">
+                            <h3>Formal Dresses</h3>
+                            <p>Sophisticated dresses for professional settings</p>
+                            <a href="#" class="shop-now" onclick="event.stopPropagation(); openCategory('formal')">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Product Pages for Women's Dresses -->
+    <div id="eveningPage" class="product-page">
+        <div class="container">
+            <a href="#" class="back-button" onclick="showHome()">← Back to Home</a>
+            <h2 class="section-title">Evening Dresses Collection</h2>
+            <div class="product-grid" id="eveningGrid"></div>
+        </div>
+    </div>
+
+    <div id="casualPage" class="product-page">
+        <div class="container">
+            <a href="#" class="back-button" onclick="showHome()">← Back to Home</a>
+            <h2 class="section-title">Casual Dresses Collection</h2>
+            <div class="product-grid" id="casualGrid"></div>
+        </div>
+    </div>
+
+    <div id="formalPage" class="product-page">
+        <div class="container">
+            <a href="#" class="back-button" onclick="showHome()">← Back to Home</a>
+            <h2 class="section-title">Formal Dresses Collection</h2>
+            <div class="product-grid" id="formalGrid"></div>
+        </div>
+    </div>
+
+    <section class="section brand-section" id="brands">
+        <h2 class="section-title">Our Trusted Brands</h2>
+        <div class="brand-slider">
+            <div class="brand-slide"><img src="https://logos-world.net/wp-content/uploads/2020/04/Adidas-Logo.png"></div>
+            <div class="brand-slide"><img src="https://tse2.mm.bing.net/th/id/OIP.ooh86wrFKVC50PW8s6AfuwHaBO?rs=1&pid=ImgDetMain&o=7&rm=3"></div>
+            <div class="brand-slide"><img src="https://logos-world.net/wp-content/uploads/2020/05/Zara-Logo.png"></div>
+            <div class="brand-slide"><img src="https://purepng.com/public/uploads/large/purepng.com-hm-logohmlogobrand-logologos-821523995206jiskp.png"></div>
+            <div class="brand-slide"><img src="https://th.bing.com/th/id/R.b2ed9be05fd8fce1d158b1cb742c6d95?rik=Nym9nX5V5UJU%2fQ&riu=http%3a%2f%2flofrev.net%2fwp-content%2fphotos%2f2016%2f06%2fpuma-logo-1.jpg&ehk=2g4AZPfKggqysOQWc5kUPpMbDah%2f57X7KHdcGeibZCY%3d&risl=&pid=ImgRaw&r=0"></div>
+            <div class="brand-slide"><img src="https://mbluxury1.s3.amazonaws.com/2022/02/25172616/chanel-1.jpg"></div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h3>Stay Updated</h3>
+            <p>Subscribe to our newsletter for the latest fashion trends and exclusive offers</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Size Guide</a>
+                    <a href="#">Returns</a>
+                    <a href="#">Shipping Info</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">Live Chat</a>
+                    <a href="#">Support</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TrendWear. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Product Database for Dresses
+        const products = {
+            evening: [
+                { id: 'e1', name: 'Elegant Evening Gown', price: 129.99, image: 'https://i.pinimg.com/1200x/c0/08/a1/c008a19893ffe3bb919bee058feeca98.jpg' },
+                { id: 'e2', name: 'Black Cocktail Dress', price: 89.99, image: 'https://i.pinimg.com/736x/38/5a/ea/385aeab3c9b1aa660b5673bdb79a197e.jpg' },
+                { id: 'e3', name: 'Red Carpet Gown', price: 199.99, image: 'https://i.pinimg.com/1200x/65/bb/0a/65bb0a3b01da706c4b80fe4b5c6f3804.jpg' },
+                { id: 'e4', name: 'Sequined Party Dress', price: 149.99, image: 'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=500&h=600&fit=crop' },
+                { id: 'e5', name: 'Velvet Evening Dress', price: 179.99, image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=500&h=600&fit=crop' },
+                { id: 'e6', name: 'Silk Maxi Gown', price: 219.99, image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=500&h=600&fit=crop' }
+            ],
+            casual: [
+                { id: 'c1', name: 'Casual Summer Dress', price: 49.99, image: 'https://i.pinimg.com/1200x/c9/f4/bb/c9f4bb6d74c6aeafc87271ae8e0ec174.jpg' },
+                { id: 'c2', name: 'Floral Sundress', price: 59.99, image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500&h=600&fit=crop' },
+                { id: 'c3', name: 'Denim Shirt Dress', price: 69.99, image: 'https://i.pinimg.com/1200x/79/14/14/7914141decd254145647ff8bd26b03ca.jpg' },
+                { id: 'c4', name: 'Bohemian Maxi Dress', price: 79.99, image: 'https://i.pinimg.com/736x/5f/78/61/5f78617c95552f3a888a791e31371c9f.jpg' },
+                { id: 'c5', name: 'Knit Sweater Dress', price: 89.99, image: 'https://i.pinimg.com/736x/bb/b4/4f/bbb44fd7437f9b969a65dbacfc48f5ac.jpg' },
+                { id: 'c6', name: 'T-Shirt Dress', price: 39.99, image: 'https://images.unsplash.com/photo-1572804013427-4d7ca7268217?w=500&h=600&fit=crop' }
+            ],
+            formal: [
+                { id: 'f1', name: 'Formal Office Dress', price: 69.99, image: 'https://i.pinimg.com/736x/71/1c/48/711c48f611c7aeba39877765fb1374ba.jpg' },
+                { id: 'f2', name: 'Business Sheath Dress', price: 79.99, image: 'https://images.unsplash.com/photo-1583496661160-fb5886a13d77?w=500&h=600&fit=crop' },
+                { id: 'f3', name: 'Professional Wrap Dress', price: 89.99, image: 'https://i.pinimg.com/1200x/53/08/69/5308690118ce3c108d0d693376a94655.jpg' },
+                { id: 'f4', name: 'Corporate A-Line Dress', price: 99.99, image: 'https://i.pinimg.com/736x/46/71/79/46717922695bcaeb4f9dc221b3d2b79f.jpg' },
+                { id: 'f5', name: 'Executive Shift Dress', price: 109.99, image: 'https://i.pinimg.com/1200x/f5/76/73/f5767318693e0494173059cd8920eb4a.jpg' },
+                { id: 'f6', name: 'Boardroom Midi Dress', price: 119.99, image: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500&h=600&fit=crop' }
+            ]
+        };
+
+        // Search keywords mapping
+        const searchKeywords = {
+            evening: ['evening', 'gown', 'cocktail', 'party', 'formal', 'special occasion'],
+            casual: ['casual', 'summer', 'sundress', 'everyday', 'comfortable', 'relaxed'],
+            formal: ['formal', 'office', 'business', 'professional', 'corporate', 'work']
+        };
+
+        // Cart data
+        let cart = [];
+
+        // Initialize products on page load
+        window.onload = function() {
+            loadProducts();
+        };
+
+        // Load products into grids
+        function loadProducts() {
+            Object.keys(products).forEach(category => {
+                const grid = document.getElementById(category + 'Grid');
+                if (grid) {
+                    grid.innerHTML = products[category].map(product => `
+                        <div class="product-card">
+                            <img src="${product.image}" alt="${product.name}" class="product-image">
+                            <div class="product-info">
+                                <div class="product-name">${product.name}</div>
+                                <div class="product-price">$${product.price.toFixed(2)}</div>
+                                <button class="add-to-cart" 
+                                    data-id="${product.id}" 
+                                    data-name="${product.name}" 
+                                    data-price="${product.price}"
+                                    data-image="${product.image}"
+                                    onclick="addToCart('${product.id}', '${product.name}', ${product.price}, '${product.image}')">
+                                    Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            if (query.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+
+            const matches = [];
+            
+            Object.keys(searchKeywords).forEach(category => {
+                searchKeywords[category].forEach(keyword => {
+                    if (keyword.includes(query) || query.includes(keyword)) {
+                        if (!matches.includes(category)) {
+                            matches.push(category);
+                        }
+                    }
+                });
+            });
+
+            if (matches.length > 0) {
+                searchResults.innerHTML = matches.map(category => {
+                    const displayName = category.charAt(0).toUpperCase() + category.slice(1) + ' Dresses';
+                    return <div class="search-result-item" onclick="openCategory('${category}')">${displayName}</div>;
+                }).join('');
+                searchResults.classList.add('active');
+            } else {
+                searchResults.innerHTML = '<div class="no-results">No results found</div>';
+                searchResults.classList.add('active');
+            }
+        });
+
+        // Perform search on button click
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query.length === 0) return;
+
+            let foundCategory = null;
+            
+            Object.keys(searchKeywords).forEach(category => {
+                searchKeywords[category].forEach(keyword => {
+                    if (keyword.includes(query) || query.includes(keyword)) {
+                        foundCategory = category;
+                    }
+                });
+            });
+
+            if (foundCategory) {
+                openCategory(foundCategory);
+                searchResults.classList.remove('active');
+                searchInput.value = '';
+            }
+        }
+
+        // Enter key search
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.classList.remove('active');
+            }
+        });
+
+        // Open category page
+        function openCategory(category) {
+            // Hide home content
+            document.getElementById('homeContent').style.display = 'none';
+            
+            // Hide all product pages
+            document.querySelectorAll('.product-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected category page
+            const pageId = category + 'Page';
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show home page
+        function showHome() {
+            // Show home content
+            document.getElementById('homeContent').style.display = 'block';
+            
+            // Hide all product pages
+            document.querySelectorAll('.product-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle cart modal
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('active');
+        }
+
+        // Close cart when clicking outside
+        document.getElementById('cartModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                toggleCart();
+            }
+        });
+
+        // Add item to cart
+        function addToCart(id, name, price, image) {
+            const existingItem = cart.find(item => item.id === id);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            
+            // Show cart briefly
+            const modal = document.getElementById('cartModal');
+            if (!modal.classList.contains('active')) {
+                toggleCart();
+                setTimeout(() => {
+                    toggleCart();
+                }, 2000);
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        // Update item quantity
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        // Update cart display
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartFooter = document.getElementById('cartFooter');
+
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+
+            // If cart is empty
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty">Your cart is empty</div>';
+                cartFooter.style.display = 'none';
+                return;
+            }
+
+            // Show footer
+            cartFooter.style.display = 'block';
+
+            // Generate cart items HTML
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
+                        </div>
+                    </div>
+                    <button class="remove-item" onclick="removeFromCart('${item.id}')">Remove</button>
+                </div>
+            `).join('');
+
+            // Calculate and update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = $${total.toFixed(2)};
+        }
+
+        // Checkout function
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            alert(Thank you for your purchase!\nTotal: $${total.toFixed(2)}\n\nThis is a demo. No actual payment will be processed.);
+            
+            // Clear cart
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        // Popup login/signup
+        function openPopup() {
+            alert('Login/Signup functionality would open here in a complete implementation.');
+        }
+    </script>
+</body>
+</html>
